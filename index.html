@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Gemba | Home</title>
+  <link rel="stylesheet" href="style.css"  type="text/css" >
+  <script src="script.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<script>
+function animateLeft($src, $tgt){
+    var $parent = $src.parent();
+    var width = $parent.width();
+    var srcWidth = $src.width();
+    
+    $src.css({position: 'absolute'});
+    $tgt.hide().appendTo($parent).css({left: width, position: 'relative'});
+    
+    $src.animate({left : -width}, 500, function(){
+        $src.hide();
+        $src.css({left: null, position: null});
+    });
+    $tgt.show().animate({left: 0}, 500, function(){
+        $tgt.css({left: null, position: null});
+    });
+}
+
+var scrollY = 0;
+var distance = 60;
+var speed = 100;
+function autoScrollTo(el) {
+	speed = 25;
+	var currentY = window.pageYOffset;
+	var targetY = document.getElementById(el).offsetTop;
+	var bodyHeight = document.body.offsetHeight;
+	var yPos = currentY + window.innerHeight;
+	var animator = setTimeout('autoScrollTo(\''+el+'\')',speed);
+	
+	
+	
+	if(yPos > bodyHeight-25){
+		clearTimeout(animator);
+	} else {
+		if(currentY < targetY-distance){
+		    scrollY = currentY+distance;
+		    window.scroll(0, scrollY);
+	    } else {
+		    clearTimeout(animator);
+	    }
+	}
+	   
+}
+function scrollfixed(){
+	var y = $(window).scrollTop();  
+$(window).scrollTop(y+300);}
+
+$(function(){
+    var $first = $("#first");
+    var $second = $("#second");
+	var flag = 1;
+	var hmkr = $("#hmkr");
+	var krna = $("#krna");
+	$second.hide();
+	hmkr.addClass('navbtnact');
+	
+
+	
+	
+
+    
+    $("#hmkr").click(function(){
+		autoScrollTo('navtab');
+		if(flag != 1){
+        animateLeft($second , $first);
+		autoScrollTo('navtab');
+		flag = 1;
+		hmkr.addClass('navbtnact');
+		krna.removeClass('navbtnact');}
+		});
+	$("#krna").click(function(){
+        if(flag != 0){
+		animateLeft($first , $second);
+		autoScrollTo('navtab');
+		flag = 0;
+		krna.addClass('navbtnact');
+		hmkr.removeClass('navbtnact');}
+	});
+	
+})
+</script>
+<header>
+<ul>
+<!-- <li>Contact Us</li> -->
+<!-- <li>About Us</li> -->
+</ul>
+<a href="https://play.google.com/store/apps/details?id=com.gemba.consumer" onclick="window.open(this.href); return false;"><img src="images/downld.png"></a>
+</header>
+
+<div id="navtab">
+<div id="hmkr" class="navbtn" >Homemaker</div>
+<div id="krna" class="navbtn" >Kirana</div>
+</div>
+<div class="container" id="container">
+    <div class="contents" id="first">
+        <div class="cntclm" ><p>Is Gemba designed for you?</p></div>
+		
+		<div class="stps">
+		<div class="cntblock"><img src="images/ic_1.png" alt="Homemaker">
+		<div class="txtblock">Are you a homemaker located anywhere in India?</div></div>
+		<div class="cntblock"><img src="images/ic_2.png" alt="Delivery">
+		<div class="txtblock">Do you order groceries from your local kirana store?</div></div>
+		<div class="cntblock"><img src="images/ic_3.png" alt="smartphone?">
+		<div class="txtblock">Do you have a smartphone?</div></div>	
+		</div>
+		
+		
+		<div onclick="scrollfixed()"><img class="arrow" src="images/arrow.png" alt="arrow"></div>
+		<h3 style="font-size: 130%;">If yes,</h3>
+		<div class="midtext"> Gemba solves many problems and you can place an order with your kirana store in under 2 minutes.<br>  Even if he is not registered with us.</div>
+		<div onclick="scrollfixed()"><img class="arrow" src="images/arrow.png" alt="arrow"></div>
+		<div  class="cntclm"><p>Just follow these 3 simple steps:</p></div>
+		
+		<div class="stps">
+		<div class="cntblock"><img src="images/ic_7.png" alt="downloadapp">
+		<div class="txtblock">Download the app & make a list of things to buy</div></div>
+		<div class="cntblock"><img src="images/ic_4.png" alt="place order">
+		<div class="txtblock">Place an order by choosing your kirana store from your phonebook</div></div>
+		<div class="cntblock"><img src="images/ic_5.png" alt="get delivery">
+		<div class="txtblock">Get confirmation & delivery</div></div>
+		</div>
+		
+		
+		<div><a href="https://play.google.com/store/apps/details?id=com.gemba.consumer" onclick="window.open(this.href); return false;"><img class="dldimg" src="images/downld.png"></a></div>
+		<h3>The simpler way to order groceries from your local store</h3>
+		
+		<div id="contact">
+		<div style="height:2px; width:60%; background-color:#f2f2f2; margin: 0 auto;"></div>
+		<h2>Contact Us</h2>
+		
+		<div id="contactContents">
+		<div><img src="images/fic1.png">
+			<p>#104, F1, First Floor,<br>
+13th Main, HSR Layout Sector 5,<br>
+Bangalore India.</p>
+			<img src="images/fic2.png">
+			<p>+91-9999888877</p>
+			<img src="images/fic3.png">
+			<p>email@placeholder.com</p></div>
+				<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15555.318309707289!2d77.6378113!3d12.9186726!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xcbb64d29480fd37c!2s7C+Studio!5e0!3m2!1sen!2sin!4v1452494533884" width="60%" height="250px" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+	</div>
+	</div>
+		
+		<footer >
+		<p>Copyright 2015 &copy;</p>
+		</footer>
+		
+    </div>
+    
+    <div class="contents" id="second">
+        <div class="cntclm" ><p>Is Gemba designed for you?</p></div>
+		
+		<div class="stps">
+		<div class="cntblock"><img src="images/ic_10.png" alt="deliver?">
+		<div class="txtblock">Do you deliver groceries to customers' homes?</div></div>
+		<div class="cntblock"><img src="images/ic_3.png" alt="samartphone?">
+		<div class="txtblock">Do you have a smartphone?</div></div>
+		<div class="cntblock"><img src="images/ic_11.png" alt="simplify?">
+		<div class="txtblock">Do you wish to simplify your customers' lives?</div></div>
+		<div class="cntblock"><img src="images/ic_12.png" alt="increase sale">
+		<div class="txtblock">Do you wish to increase sales?</div></div>	
+		</div>
+		<div onclick="scrollfixed()"><img class="arrow" src="images/arrow.png" alt="arrow"></div>
+		
+		<h3  style="font-size: 130%;">If yes,</h3>
+		<div class="midtext"> Gemba solves many problems and you can receive orders from customers on your smartphone.<br>  Even if your customers are not registered with us.</div>
+		
+		<div onclick="scrollfixed()"><img class="arrow" src="images/arrow.png" alt="arrow"></div>
+		
+		<div class="cntclm"><p>Just follow these 3 simple steps:</p></div>
+		
+		<div  class="stps">
+		<div class="cntblock"><img src="images/ic_7.png" alt="download">
+		<div class="txtblock">Download Gemba and register yourself in 2 minutes</div></div>
+		<div class="cntblock"><img src="images/ic_8.png" alt="invite">
+		<div class="txtblock">Invite your customers to use the app</div></div>
+		<div class="cntblock"><img src="images/ic_9.png" alt="receive orders">
+		<div class="txtblock">Receive orders and deliver groceries</div></div>
+		</div>
+		
+		
+		<div><a href="https://play.google.com/store/apps/details?id=com.gemba.store" onclick="window.open(this.href); return false;" ><img class="dldimg" src="images/downld.png" alt="download"></a></div>
+		<h3>The simpler way to order groceries from your local store</h3>
+		
+		<div id="contact">
+		<div style="height:2px; width:60%; background-color:#f2f2f2; margin: 0 auto;"></div>
+		<h2>Contact Us</h2>
+		
+		<div id="contactContents">
+		<div><img src="images/fic1.png">
+		<p>#104, F1, First Floor,<br>
+		13th Main, HSR Layout Sector 5,<br>
+		Bangalore India.</p>
+		<img src="images/fic2.png">
+		<p>+91-9999888877</p>
+		<img src="images/fic3.png">
+		<p>email@placeholder.com</p></div>
+
+		<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15555.318309707289!2d77.6378113!3d12.9186726!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xcbb64d29480fd37c!2s7C+Studio!5e0!3m2!1sen!2sin!4v1452494533884" width="60%" height="250px" frameborder="0" style="border:0" allowfullscreen></iframe>
+	</div>
+	</div>
+	
+	<footer>
+	<p>Copyright 2015 &copy;	 </p>
+	</footer>
+    	
+</div>
+
+
+
+</body>
+</html>
